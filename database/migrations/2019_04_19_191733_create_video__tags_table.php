@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSuscribesTable extends Migration
+class CreateVideoTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateSuscribesTable extends Migration
      */
     public function up()
     {
-        Schema::create('suscribes', function (Blueprint $table) {
-            // $table->bigIncrements('id');
-            // $table->timestamps();
+        Schema::create('video__tags', function (Blueprint $table) {
+            //$table->bigIncrements('id');
+            //$table->timestamps();
 
-            $table->integer("suscriberId");
-            $table->integer("influencerId");
+            $table->integer("videoId");
+            $table->integer("tagId");
         });
     }
 
@@ -29,6 +29,6 @@ class CreateSuscribesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suscribes');
+        Schema::dropIfExists('video__tags');
     }
 }

@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::resources([
     "coment" => "ComentController",
     "language" => "IdiomaController",
@@ -21,5 +20,8 @@ Route::resources([
     "videoUser" => "VideoUserController",
     "videoVideoList" => "VideoVideoListController",
     "video" => "VideoController",
-    "videoList" => "VideoListController"
+    "videoList" => "VideoListController",
+    "tag" => "TagController",
+    "videoTag" => "VideoTagController",
+    "category" => "CategoryController"
 ]);

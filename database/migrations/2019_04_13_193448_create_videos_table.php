@@ -23,6 +23,7 @@ class CreateVideosTable extends Migration
             $table->string("name");
             
             $table->string("userId");
+            $table->string("categoryId");
         });
     }
 

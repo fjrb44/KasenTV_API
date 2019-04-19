@@ -19,7 +19,8 @@ class CreateComentsTable extends Migration
 
             $table->string("message");
 
-            $table->integer("userId");
+            $table->integer("responseId");
+            // $table->integer("userId");
         });
     }
 
