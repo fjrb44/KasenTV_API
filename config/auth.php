@@ -12,11 +12,13 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
-
+    
+    /*
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    */
 
     /*
     |--------------------------------------------------------------------------
@@ -35,6 +37,12 @@ return [
     |
     */
 
+    'guards' =>[
+        'api' => [
+            'driver' => 'firebase',
+        ]
+    ],
+    /*
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -47,6 +55,7 @@ return [
             'hash' => false,
         ],
     ],
+    */
 
     /*
     |--------------------------------------------------------------------------
@@ -65,6 +74,7 @@ return [
     |
     */
 
+    /*
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
@@ -76,6 +86,7 @@ return [
         //     'table' => 'users',
         // ],
     ],
+    */
 
     /*
     |--------------------------------------------------------------------------
@@ -92,6 +103,7 @@ return [
     |
     */
 
+    /*
     'passwords' => [
         'users' => [
             'provider' => 'users',
@@ -99,5 +111,6 @@ return [
             'expire' => 60,
         ],
     ],
+    */
 
 ];

@@ -15,6 +15,7 @@ class IdiomaController extends Controller
     public function index()
     {
         //
+        return Idioma::all();
     }
 
     /**
@@ -47,6 +48,7 @@ class IdiomaController extends Controller
     public function show(Idioma $idioma)
     {
         //
+        return $idioma;
     }
 
     /**

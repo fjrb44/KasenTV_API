@@ -15,6 +15,7 @@ class MentionController extends Controller
     public function index()
     {
         //
+        return Mention::all();
     }
 
     /**
@@ -47,6 +48,7 @@ class MentionController extends Controller
     public function show(Mention $mention)
     {
         //
+        return $mention;
     }
 
     /**

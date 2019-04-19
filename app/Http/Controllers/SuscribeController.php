@@ -15,6 +15,7 @@ class SuscribeController extends Controller
     public function index()
     {
         //
+        return Suscribe::all();
     }
 
     /**
@@ -47,6 +48,7 @@ class SuscribeController extends Controller
     public function show(Suscribe $suscribe)
     {
         //
+        return $suscribe;
     }
 
     /**

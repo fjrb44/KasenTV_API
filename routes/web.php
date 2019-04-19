@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::resources([
+    "coment" => "ComentController",
+    "language" => "IdiomaController",
+    "mention" => "MentionController",
+    "suscribe" => "SuscribeController",
+    "user" => "UsuarioController",
+    "videoUser" => "VideoUserController",
+    "videoVideoList" => "VideoVideoListController",
+    "video" => "VideoController",
+    "videoList" => "VideoListController"
+]);

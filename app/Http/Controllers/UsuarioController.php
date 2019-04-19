@@ -15,6 +15,7 @@ class UsuarioController extends Controller
     public function index()
     {
         //
+        return Usuario::all();
     }
 
     /**
@@ -47,6 +48,7 @@ class UsuarioController extends Controller
     public function show(Usuario $usuario)
     {
         //
+        return $usuario;
     }
 
     /**

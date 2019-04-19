@@ -15,6 +15,7 @@ class VideoListController extends Controller
     public function index()
     {
         //
+        return VideoList::all();
     }
 
     /**
@@ -47,6 +48,7 @@ class VideoListController extends Controller
     public function show(VideoList $videoList)
     {
         //
+        return $videoList;
     }
 
     /**

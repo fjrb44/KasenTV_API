@@ -15,6 +15,7 @@ class VideoUserController extends Controller
     public function index()
     {
         //
+        return Video_User::all();
     }
 
     /**
@@ -47,6 +48,7 @@ class VideoUserController extends Controller
     public function show(Video_User $video_User)
     {
         //
+        return $video_User;
     }
 
     /**

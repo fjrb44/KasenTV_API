@@ -14,6 +14,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton(Verifier::class, function ($app) {
+            return new Verifier('login-d8f84');
+        });
     }
 
     /**
