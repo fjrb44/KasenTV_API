@@ -18,6 +18,8 @@ class CreateUsuariosTable extends Migration
             $table->timestamps();
 
             $table->string("email");
+
+            $table->integer("idiomaId");
         });
     }
 
