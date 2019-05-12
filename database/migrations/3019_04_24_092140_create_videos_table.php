@@ -16,14 +16,17 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-
+            
             $table->string("description");
             $table->string("url");
             $table->string("imageUrl");
             $table->string("name");
             
             $table->string("userId");
+            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
             $table->string("categoryId");
+            $table->foreign('categoryId')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVideoUsersTable extends Migration
+class CreateWatchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateVideoUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('video__users', function (Blueprint $table) {
+        Schema::create('watches', function (Blueprint $table) {
             // $table->bigIncrements('id');
             // $table->timestamps();
 
             $table->integer("userId");
+            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
             $table->integer("videoId");
+            $table->foreign('videoId')->references('id')->on('videos')->onDelete('cascade')->onUpdate('cascade');
+
             $table->integer("time");
         });
     }
@@ -30,6 +34,6 @@ class CreateVideoUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('video__users');
+        Schema::dropIfExists('watches');
     }
 }

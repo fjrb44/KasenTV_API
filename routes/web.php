@@ -13,11 +13,11 @@
 
 Route::resources([
     "coment" => "ComentController",
-    "language" => "IdiomaController",
+    "language" => "LanguageController",
     "mention" => "MentionController",
     "suscribe" => "SuscribeController",
-    "user" => "UsuarioController",
-    "videoUser" => "VideoUserController",
+    "user" => "UserController",
+    "videoUser" => "WatchController",
     "videoVideoList" => "VideoVideoListController",
     "video" => "VideoController",
     "videoList" => "VideoListController",

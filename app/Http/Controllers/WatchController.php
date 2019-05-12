@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Idioma;
+use App\Watch;
 use Illuminate\Http\Request;
 
-class IdiomaController extends Controller
+class WatchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class IdiomaController extends Controller
      */
     public function index()
     {
-        //
-        return Idioma::all();
+        return Watch::all();
     }
 
     /**
@@ -42,22 +41,21 @@ class IdiomaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Idioma  $idioma
+     * @param  \App\Watch  $watch
      * @return \Illuminate\Http\Response
      */
-    public function show(Idioma $idioma)
+    public function show(Watch $watch)
     {
-        //
-        return $idioma;
+        return $watch;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Idioma  $idioma
+     * @param  \App\Watch  $watch
      * @return \Illuminate\Http\Response
      */
-    public function edit(Idioma $idioma)
+    public function edit(Watch $watch)
     {
         //
     }
@@ -66,10 +64,10 @@ class IdiomaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Idioma  $idioma
+     * @param  \App\Watch  $watch
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Idioma $idioma)
+    public function update(Request $request, Watch $watch)
     {
         //
     }
@@ -77,10 +75,10 @@ class IdiomaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Idioma  $idioma
+     * @param  \App\Watch  $watch
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Idioma $idioma)
+    public function destroy(Watch $watch)
     {
         //
     }

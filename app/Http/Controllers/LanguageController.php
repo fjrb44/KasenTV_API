@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Usuario;
+use App\Language;
 use Illuminate\Http\Request;
 
-class UsuarioController extends Controller
+class LanguageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
-        return Usuario::all();
+        return Language::all();
     }
 
     /**
@@ -42,22 +41,21 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show(Language $language)
     {
-        //
-        return $usuario;
+        return $language;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuario $usuario)
+    public function edit(Language $language)
     {
         //
     }
@@ -66,10 +64,10 @@ class UsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Usuario  $usuario
+     * @param  \App\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, Language $language)
     {
         //
     }
@@ -77,10 +75,10 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Usuario  $usuario
+     * @param  \App\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(Language $language)
     {
         //
     }

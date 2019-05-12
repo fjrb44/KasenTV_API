@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Video_VideoList;
+use App\VideoVideoList;
 use Illuminate\Http\Request;
 
 class VideoVideoListController extends Controller
@@ -14,8 +14,7 @@ class VideoVideoListController extends Controller
      */
     public function index()
     {
-        //
-        return Video_VideoList::all();
+        return VideoVideoList::all();
     }
 
     /**
@@ -42,22 +41,21 @@ class VideoVideoListController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Video_VideoList  $video_VideoList
+     * @param  \App\VideoVideoList  $videoVideoList
      * @return \Illuminate\Http\Response
      */
-    public function show(Video_VideoList $video_VideoList)
+    public function show(VideoVideoList $videoVideoList)
     {
-        //
-        return $video_VideoList;
+        return $videoVideoList;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Video_VideoList  $video_VideoList
+     * @param  \App\VideoVideoList  $videoVideoList
      * @return \Illuminate\Http\Response
      */
-    public function edit(Video_VideoList $video_VideoList)
+    public function edit(VideoVideoList $videoVideoList)
     {
         //
     }
@@ -66,10 +64,10 @@ class VideoVideoListController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Video_VideoList  $video_VideoList
+     * @param  \App\VideoVideoList  $videoVideoList
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Video_VideoList $video_VideoList)
+    public function update(Request $request, VideoVideoList $videoVideoList)
     {
         //
     }
@@ -77,10 +75,10 @@ class VideoVideoListController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Video_VideoList  $video_VideoList
+     * @param  \App\VideoVideoList  $videoVideoList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video_VideoList $video_VideoList)
+    public function destroy(VideoVideoList $videoVideoList)
     {
         //
     }

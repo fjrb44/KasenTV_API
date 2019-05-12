@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVideoVideoListsTable extends Migration
+class CreateListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateVideoVideoListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('video__video_lists', function (Blueprint $table) {
-            // $table->bigIncrements('id');
-            // $table->timestamps();
-
-            $table->integer("videoListId");
-            $table->integer("videoId");
+        Schema::create('lists', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +26,6 @@ class CreateVideoVideoListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('video__video_lists');
+        Schema::dropIfExists('lists');
     }
 }

@@ -13,12 +13,15 @@ class CreateVideoTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('video__tags', function (Blueprint $table) {
-            //$table->bigIncrements('id');
-            //$table->timestamps();
+        Schema::create('video_tags', function (Blueprint $table) {
+            // $table->bigIncrements('id');
+            // $table->timestamps();
 
             $table->integer("videoId");
+            $table->foreign('videoId')->references('id')->on('videos')->onDelete('cascade')->onUpdate('cascade');
+
             $table->integer("tagId");
+            $table->foreign('tagId')->references('id')->on('tags')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -29,6 +32,6 @@ class CreateVideoTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('video__tags');
+        Schema::dropIfExists('video_tags');
     }
 }

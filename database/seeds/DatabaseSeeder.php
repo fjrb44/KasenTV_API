@@ -12,5 +12,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        $idiomas = [ "Español", "Ingles", "Frances" ];
+        $idiomaCort = [ "esp", "eng", "fr" ];
+
+        for($i = 0, $length = sizeof($idiomas); $i < $length; $i++){
+            DB::table('languages')->insert([
+                'name' => $idiomas[$i],
+                'shortName' => $idiomaCort[$i]
+            ]);
+        }
     }
 }

@@ -14,7 +14,6 @@ class ComentController extends Controller
      */
     public function index()
     {
-        //
         return Coment::all();
     }
 
@@ -47,7 +46,6 @@ class ComentController extends Controller
      */
     public function show(Coment $coment)
     {
-        //
         return $coment;
     }
 

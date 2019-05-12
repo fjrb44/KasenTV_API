@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Video_Tag;
+use App\VideoTag;
 use Illuminate\Http\Request;
 
 class VideoTagController extends Controller
@@ -14,8 +14,7 @@ class VideoTagController extends Controller
      */
     public function index()
     {
-        //
-        return Video_Tag::all();
+        return VideoTag::all();
     }
 
     /**
@@ -42,22 +41,21 @@ class VideoTagController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Video_Tag  $video_Tag
+     * @param  \App\VideoTag  $videoTag
      * @return \Illuminate\Http\Response
      */
-    public function show(Video_Tag $video_Tag)
+    public function show(VideoTag $videoTag)
     {
-        //
-        return $video_Tag;
+        return $videoTag;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Video_Tag  $video_Tag
+     * @param  \App\VideoTag  $videoTag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Video_Tag $video_Tag)
+    public function edit(VideoTag $videoTag)
     {
         //
     }
@@ -66,10 +64,10 @@ class VideoTagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Video_Tag  $video_Tag
+     * @param  \App\VideoTag  $videoTag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Video_Tag $video_Tag)
+    public function update(Request $request, VideoTag $videoTag)
     {
         //
     }
@@ -77,10 +75,10 @@ class VideoTagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Video_Tag  $video_Tag
+     * @param  \App\VideoTag  $videoTag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video_Tag $video_Tag)
+    public function destroy(VideoTag $videoTag)
     {
         //
     }

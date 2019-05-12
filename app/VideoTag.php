@@ -4,13 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Video_VideoList extends Model
+class VideoTag extends Model
 {
-    //
+    public function tag(){
+        $this->belongsTo("App\Tag");
+    }
     public function video(){
         $this->belongsTo("App\Video");
-    }
-    public function videoList(){
-        $this->belongsTo("App\VideoList");
     }
 }
