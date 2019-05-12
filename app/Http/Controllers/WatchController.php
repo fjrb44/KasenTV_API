@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Watch;
 use Illuminate\Http\Request;
+use App\Http\Requests\WatchRequest;
 
 class WatchController extends Controller
 {
@@ -33,9 +34,20 @@ class WatchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WatchRequest $request)
     {
-        //
+        $watch = new Watch();
+
+        $watch->userId = $request->input("userId");
+        $watch->videoId = $request->input("videoId");
+
+        if(empty($request->input("time"))){
+            $watch->time = 0;
+        }else{
+            $watch->time = $request->input("time");
+        }
+
+        $watch->save();
     }
 
     /**
@@ -44,9 +56,9 @@ class WatchController extends Controller
      * @param  \App\Watch  $watch
      * @return \Illuminate\Http\Response
      */
-    public function show(Watch $watch)
+    public function show($userId, $videoId)
     {
-        return $watch;
+        return Watch::where("userId", $userId)->where("videoId", $videoId)->get();
     }
 
     /**

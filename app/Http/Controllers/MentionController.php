@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mention;
 use Illuminate\Http\Request;
+use App\Http\Requests\MentionRequest;
 
 class MentionController extends Controller
 {
@@ -33,9 +34,15 @@ class MentionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MentionRequest $request)
     {
-        //
+        $mention = new Mention();
+
+        $mention->userId = $request->input("userId");
+        $mention->videoId = $request->input("videoId");
+        $mention->comentId = $request->input("comentId");
+
+        $mention->save();
     }
 
     /**

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Video;
 use Illuminate\Http\Request;
+use App\Http\Requests\NewVideoRequest;
+use App\Http\Requests\EditVideoRequest;
 
 class VideoController extends Controller
 {
@@ -26,6 +28,7 @@ class VideoController extends Controller
     {
         //
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -33,8 +36,31 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(NewVideoRequest $request){
+        $video = new Video();
+
+        if($request->hasFile('url')){
+            $urlVideo = $request->file('url');
+            $url = "v_".$video->id.time().$urlVideo->getClientOriginalName();
+
+            $file->move(public_path("storage"), $url);
+
+            $video->url = $url;
+        }
+
+        if($request->hasFile('imageUrl')){
+            $urlImage = $request->file('imageUrl');
+            $imageUrl = "i_".$video->id.time().$urlImage->getClientOriginalName();
+            
+            $file->move(public_path("storage"), $imageUrl);
+
+            $video->imageUrl = $imageUrl;
+        }
+
+        $video->description = $request->input('description');
+        $video->title = $request->input('title');
+        $video->userId = $request->input('userId');
+        $video->categoryId = $request->input('categoryId');
         //
     }
 
@@ -44,9 +70,9 @@ class VideoController extends Controller
      * @param  \App\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function show(Video $video)
+    public function show($id)
     {
-        return $video;
+        return Video::find($id);
     }
 
     /**
@@ -67,9 +93,41 @@ class VideoController extends Controller
      * @param  \App\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Video $video)
+    public function update(EditVideoRequest $request, $id)
     {
-        //
+        $video = Video::find($id);
+        $aux = false;
+        
+        if($request->hasFile('logo')){
+            Storage::delete("public/".$video->logo);
+
+            $image = $request->file('imageUrl');
+            $imageUrl = "i_".$empresa->id.time().$image->getClientOriginalName();
+
+            $image->move(public_path("storage"), $imageUrl);
+            $video->imageUrl = $imageUrl;
+            $aux = true;
+        }
+
+        if($video->description != $request->input('description')){
+            $video->description = $request->input('description');
+            $aux = true;
+        }
+
+        
+        if($video->title != $request->input('title')){
+            $video->title = $request->input('title');
+            $aux = true;
+        }
+        
+        if($video->categoryId != $request->input('categoryId')){
+            $video->categoryId = $request->input('categoryId');
+            $aux = true;
+        }
+
+        if($aux){
+            $video->save();
+        }
     }
 
     /**
@@ -78,8 +136,24 @@ class VideoController extends Controller
      * @param  \App\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
+    public function destroy($id)
     {
-        //
+        
+        $video = Video::find($id);
+
+        if(!empty($video)){
+            Storage::delete("public/".$video->url);
+            Storage::delete("public/".$video->imageUrl);
+
+            $video->description = "";
+            $video->url = "";
+            $video->imageUrl = "";
+            $video->title = "";
+            $video->userId = 0;
+            $video->categoryId = 0;
+
+            $video->save();
+        }
+
     }
 }

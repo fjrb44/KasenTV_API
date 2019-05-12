@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Suscribe;
 use Illuminate\Http\Request;
+use App\Http\Requests\SuscribeRequest;
 
 class SuscribeController extends Controller
 {
@@ -33,9 +34,12 @@ class SuscribeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SuscribeRequest $request)
     {
-        //
+        $suscribe = new Suscribe();
+
+        $suscribe->suscriberId = $request->input("suscriberId");
+        $suscribe->influencerId = $request->input("influencerId");
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Coment;
 use Illuminate\Http\Request;
+use App\Http\Requests\ComentRequest;
 
 class ComentController extends Controller
 {
@@ -33,9 +34,16 @@ class ComentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ComentRequest $request)
     {
-        //
+        $coment = new Coment;
+
+        $coment->text = $request->input('text');
+        $coment->responseId = $request->input('responseId');
+        
+        $coment->save();
+
+        return ["message" => "Data saved"];
     }
 
     /**
@@ -67,9 +75,12 @@ class ComentController extends Controller
      * @param  \App\Coment  $coment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Coment $coment)
+    public function update(ComentRequest $request, $id)
     {
-        //
+        $coment = Coment::find($id);
+
+        $coment->text = $coment->text."\n\nEdit: ".$request->input("text");
+        $coment->save();
     }
 
     /**

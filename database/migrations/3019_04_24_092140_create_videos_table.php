@@ -20,12 +20,12 @@ class CreateVideosTable extends Migration
             $table->string("description");
             $table->string("url");
             $table->string("imageUrl");
-            $table->string("name");
+            $table->string("title");
             
-            $table->string("userId");
+            $table->integer("userId");
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->string("categoryId");
+            $table->integer("categoryId");
             $table->foreign('categoryId')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\VideoVideoList;
 use Illuminate\Http\Request;
+use App\Http\Requests\VideoVideoListRequest;
 
 class VideoVideoListController extends Controller
 {
@@ -33,9 +34,14 @@ class VideoVideoListController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VideoVideoListRequest $request)
     {
-        //
+        $videoVideoList = new VideoVideoList();
+
+        $videoVideoList->videListId = $request->input("videoListId");
+        $videoVideoList->videoId = $request->input("videoId");
+
+        $videoVideoList->save();
     }
 
     /**
@@ -78,8 +84,8 @@ class VideoVideoListController extends Controller
      * @param  \App\VideoVideoList  $videoVideoList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VideoVideoList $videoVideoList)
+    public function destroy($videoListId, $videoId)
     {
-        //
+        VideoVideoList::where("videoListId", $videoListId)->where("videoId", $videoId)->delete();
     }
 }

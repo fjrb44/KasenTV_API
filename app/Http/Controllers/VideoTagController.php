@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\VideoTag;
 use Illuminate\Http\Request;
+use App\Http\Requests\VideoTagRequest;
 
 class VideoTagController extends Controller
 {
@@ -33,9 +34,12 @@ class VideoTagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VideoTagRequest $request)
     {
-        //
+        $videoTag = new VideoTag();
+
+        $videoTag->videoId = $request->input("videoId");
+        $videoTag->tagId = $request->input("tagId");
     }
 
     /**
@@ -78,8 +82,8 @@ class VideoTagController extends Controller
      * @param  \App\VideoTag  $videoTag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VideoTag $videoTag)
+    public function destroy($videoId, $tagId)
     {
-        //
+        VideoTag::where("videoId", $videoId)->where("tagId", $tagId)->delete();
     }
 }
