@@ -11,17 +11,6 @@
 |
 */
 
-Route::resources([
-    "coment" => "ComentController",
-    "language" => "LanguageController",
-    "mention" => "MentionController",
-    "suscribe" => "SuscribeController",
-    "user" => "UserController",
-    "videoUser" => "WatchController",
-    "videoVideoList" => "VideoVideoListController",
-    "video" => "VideoController",
-    "videoList" => "VideoListController",
-    "tag" => "TagController",
-    "videoTag" => "VideoTagController",
-    "category" => "CategoryController"
-]);
+Route::get('/', function () {
+    return view('welcome');
+});
