@@ -39,7 +39,10 @@ class ComentController extends Controller
         $coment = new Coment;
 
         $coment->text = $request->input('text');
-        $coment->responseId = $request->input('responseId');
+
+        if(!empty($request->input('responseId'))){
+            $coment->responseId = $request->input('responseId');
+        }
         
         $coment->save();
 
@@ -81,6 +84,8 @@ class ComentController extends Controller
 
         $coment->text = $coment->text."\n\nEdit: ".$request->input("text");
         $coment->save();
+
+        return ["message" => "Data changed"];
     }
 
     /**

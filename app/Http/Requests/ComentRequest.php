@@ -10,6 +10,7 @@ class ComentRequest extends FormRequest{
 
     public function rules(){
         $datos = $this->validationData();
+        
         return [
             "text" => ["required", "min:5", "max:255"],
             "responseId" => ["numeric"]

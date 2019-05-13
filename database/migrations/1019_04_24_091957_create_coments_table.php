@@ -19,7 +19,7 @@ class CreateComentsTable extends Migration
 
             $table->string("text");
             
-            $table->integer("responseId");
+            $table->integer("responseId")->nullable();
             $table->foreign('responseId')->references('id')->on('coments')->onDelete('cascade')->onUpdate('cascade');
         });
     }
