@@ -36,6 +36,13 @@ class DatabaseSeeder extends Seeder
             "languageId" => "1"
         ]);
 
+        DB::table('users')->insert([
+            'username' => "Paco",
+            'email' => "paco.morcilla@gmail.com",
+            'google_data' => "nada",
+            "languageId" => "1"
+        ]);
+
         $videoTitles = [ 
             "Video test 0", "Video test 10", "Video test 20", "Video test 30", "Video test 40",
             "Video test 1", "Video test 11", "Video test 21", "Video test 31", "Video test 41", 
@@ -59,10 +66,23 @@ class DatabaseSeeder extends Seeder
                 "userId" => $userId
             ]);
 
-            if( $userId == 1 ) $userId = 2;
-            else if($userId == 2) $userId = 1;
+            if( $userId == 3 ) $userId = 1;
+            else $userId++;
             
         }
+        
+        DB::table('suscribes')->insert([
+            "suscriberId" => 1,
+            "influencerId" => 3
+        ]);
 
+        DB::table('suscribes')->insert([
+            "suscriberId" => 3,
+            "influencerId" => 1
+        ]);
+        DB::table('suscribes')->insert([
+            "suscriberId" => 3,
+            "influencerId" => 2
+        ]);
     }
 }

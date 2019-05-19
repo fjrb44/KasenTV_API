@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Video;
+use App\Suscribe;
+use App\Mention;
 use Illuminate\Http\Request;
 use App\Http\Requests\NewVideoRequest;
 use App\Http\Requests\EditVideoRequest;
+use DB;
 
 class VideoController extends Controller
 {
@@ -14,20 +17,90 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return Video::all();
+    // Devuelve los videos mas vistos
+    public function index(){
+        return Video::select(DB::raw('videos.*, count(*) as visualizations'))
+            ->leftJoin('watches', 'id', '=', 'watches.videoId')
+            ->groupBy('id')
+            ->orderBy("visualizations")
+            ->take(50)
+            ->get();
     }
 
+    // Devuelve todos los videos de aquellos a los que este suscrito el usuario con el id pasado por parametro
+    public function home($userId){
+        $homeVideos = Video::select(DB::raw('videos.*, count(*) as visualizations'))
+            ->leftJoin('watches', 'id', '=', 'watches.videoId')
+            ->whereIn('videos.userId', function($query) use ($userId){
+                $query->select(DB::raw("influencerId"))
+                    ->from('suscribes')
+                    ->where('suscriberId', '=', "$userId");
+            })
+            ->groupBy('id')
+            ->orderBy("visualizations")
+            ->take(50)
+            ->get();
+        
+        // $homeVideos = response()->json($homeVideos);
+
+        if(sizeof($homeVideos) == 0){
+            $homeVideos = Video::select(DB::raw('videos.*, count(*) as visualizations'))
+                ->leftJoin('watches', 'id', '=', 'watches.videoId')
+                ->groupBy('id')
+                ->orderBy("visualizations")
+                ->take(50)
+                ->get();
+        }
+
+        return $homeVideos;
+    }
+
+    public function recomendations($userId, $videoId){
+        $recomendations = Video::select(DB::raw('videos.*, count(*) as visualizations'))
+            ->leftJoin('watches', 'id', '=', 'watches.videoId')
+            ->whereIn('videos.userId', function($query) use ($userId){
+                $query->select(DB::raw("influencerId"))
+                    ->from('suscribes')
+                    ->where('suscriberId', '=', "$userId");
+            })
+            ->where('id', "!=", $videoId)
+            ->groupBy('id')
+            ->orderBy("visualizations")
+            ->take(5)
+            ->get();
+
+        if(sizeof($recomendations) == 0){
+            $recomendations = Video::select(DB::raw('videos.*, count(*) as visualizations'))
+                ->leftJoin('watches', 'id', '=', 'watches.videoId')
+                ->groupBy('id')
+                ->orderBy("visualizations")
+                ->take(5)
+                ->get();
+        }
+        return $recomendations;
+    }
+
+    public function comments($videoId){
+        return Mention::select(DB::raw('coments.*'))
+            ->join('coments', 'comentId', "=", "coments.id")
+            ->where('videoId', '=', $videoId)
+            ->get();
+    }
+
+    public function userVideos($userId){
+        return Video::where('userId', '=', $userId)->take(50)->get();
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    /*
     public function create()
     {
         //
     }
+    */
     
 
     /**

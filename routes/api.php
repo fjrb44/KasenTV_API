@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 */
 
+/*
 Route::resources([
     "coment" => "ComentController",
     "language" => "LanguageController",
@@ -33,3 +34,13 @@ Route::resources([
     "videoTag" => "VideoTagController",
     "category" => "CategoryController"
 ]);
+*/
+
+Route::get("/videos", "VideoController@index"); // Get tendencies
+Route::get("/{userId}/videos", "VideoController@home"); // Get home videos of userId
+Route::get("/videos/{videoId}", "VideoController@show"); // Get the video
+Route::get("/{userId}/videos/{videoId}", "VideoController@recomendations"); // Video recomendations
+Route::get("/videos/{videoId}/comments", "VideoController@comments"); // Get video comments
+// Route::get("/videos/{videoId}/comments/{commentId}/reply", "VideoController@show"); // Get comment replies
+Route::get("/user/{userId}/videos", "VideoController@userVideos"); // Get videos from user
+Route::get("/user/{userId}", "UserController@show"); // Get user data
