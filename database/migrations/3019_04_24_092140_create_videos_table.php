@@ -25,7 +25,7 @@ class CreateVideosTable extends Migration
             $table->integer("userId");
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->integer("categoryId");
+            $table->integer("categoryId")->nullable();
             $table->foreign('categoryId')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
