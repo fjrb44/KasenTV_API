@@ -44,3 +44,4 @@ Route::get("/videos/{videoId}/comments", "VideoController@comments"); // Get vid
 // Route::get("/videos/{videoId}/comments/{commentId}/reply", "VideoController@show"); // Get comment replies
 Route::get("/user/{userId}/videos", "VideoController@userVideos"); // Get videos from user
 Route::get("/user/{userId}", "UserController@show"); // Get user data
+Route::get("/videos/search/{search}", "VideoController@search"); // Get searched videos

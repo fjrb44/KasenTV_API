@@ -87,6 +87,18 @@ class VideoController extends Controller
             ->get();
     }
 
+    public function search($search){
+        return Video::select(DB::raw('videos.*, count(*) as visualizations, users.username as username'))
+            ->leftJoin('watches', 'videos.id', '=', 'watches.videoId')
+            ->join("users", "videos.userId", '=', 'users.id')
+            ->groupBy('videos.id')
+            ->where('title', 'like', '%'.$search.'%')
+            ->orWhere('username', 'like', '%'.$search.'%')
+            ->orderBy("visualizations")
+            ->take(50)
+            ->get();
+    }
+
     public function userVideos($userId){
         return Video::where('userId', '=', $userId)->take(50)->get();
     }
