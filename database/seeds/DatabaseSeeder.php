@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'username' => "Fran",
             'email' => "fran.rios@gmail.com",
+            "logo" => "http://placehold.it/100x100",
             'google_data' => "nada",
             "languageId" => "1"
         ]);
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'username' => "Pepe",
             'email' => "pepe.poncio@gmail.com",
+            "logo" => "http://placehold.it/100x100",
             'google_data' => "nada",
             "languageId" => "1"
         ]);
@@ -39,6 +41,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'username' => "Paco",
             'email' => "paco.morcilla@gmail.com",
+            "logo" => "http://placehold.it/100x100",
             'google_data' => "nada",
             "languageId" => "1"
         ]);

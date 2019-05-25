@@ -19,9 +19,7 @@ class VideoController extends Controller
      */
     // Devuelve los videos mas vistos
     public function index(){
-        return Video::select(DB::raw('videos.*, count(*) as visualizations'))
-            ->leftJoin('watches', 'id', '=', 'watches.videoId')
-            ->groupBy('id')
+        return DB::table('VideoView')
             ->orderBy("visualizations")
             ->take(50)
             ->get();
@@ -29,14 +27,12 @@ class VideoController extends Controller
 
     // Devuelve todos los videos de aquellos a los que este suscrito el usuario con el id pasado por parametro
     public function home($userId){
-        $homeVideos = Video::select(DB::raw('videos.*, count(*) as visualizations'))
-            ->leftJoin('watches', 'id', '=', 'watches.videoId')
-            ->whereIn('videos.userId', function($query) use ($userId){
+        $homeVideos = DB::table('VideoView')
+            ->whereIn('userId', function($query) use ($userId){
                 $query->select(DB::raw("influencerId"))
                     ->from('suscribes')
                     ->where('suscriberId', '=', "$userId");
             })
-            ->groupBy('id')
             ->orderBy("visualizations")
             ->take(50)
             ->get();
@@ -44,9 +40,7 @@ class VideoController extends Controller
         // $homeVideos = response()->json($homeVideos);
 
         if(sizeof($homeVideos) == 0){
-            $homeVideos = Video::select(DB::raw('videos.*, count(*) as visualizations'))
-                ->leftJoin('watches', 'id', '=', 'watches.videoId')
-                ->groupBy('id')
+            $homeVideos = DB::table('VideoView')
                 ->orderBy("visualizations")
                 ->take(50)
                 ->get();
@@ -56,23 +50,19 @@ class VideoController extends Controller
     }
 
     public function recomendations($userId, $videoId){
-        $recomendations = Video::select(DB::raw('videos.*, count(*) as visualizations'))
-            ->leftJoin('watches', 'id', '=', 'watches.videoId')
-            ->whereIn('videos.userId', function($query) use ($userId){
+        $recomendations = DB::table('VideoView')
+            ->whereIn('userId', function($query) use ($userId){
                 $query->select(DB::raw("influencerId"))
                     ->from('suscribes')
                     ->where('suscriberId', '=', "$userId");
             })
-            ->where('id', "!=", $videoId)
-            ->groupBy('id')
+            ->where('id', "!=", $videoId)    
             ->orderBy("visualizations")
             ->take(5)
             ->get();
-
+        
         if(sizeof($recomendations) == 0){
-            $recomendations = Video::select(DB::raw('videos.*, count(*) as visualizations'))
-                ->leftJoin('watches', 'id', '=', 'watches.videoId')
-                ->groupBy('id')
+            $recomendations = DB::table('VideoView')
                 ->orderBy("visualizations")
                 ->take(5)
                 ->get();
@@ -88,10 +78,7 @@ class VideoController extends Controller
     }
 
     public function search($search){
-        return Video::select(DB::raw('videos.*, count(*) as visualizations, users.username as username'))
-            ->leftJoin('watches', 'videos.id', '=', 'watches.videoId')
-            ->join("users", "videos.userId", '=', 'users.id')
-            ->groupBy('videos.id')
+        return DB::table('VideoView')
             ->where('title', 'like', '%'.$search.'%')
             ->orWhere('username', 'like', '%'.$search.'%')
             ->orderBy("visualizations")
@@ -100,7 +87,15 @@ class VideoController extends Controller
     }
 
     public function userVideos($userId){
-        return Video::where('userId', '=', $userId)->take(50)->get();
+        return DB::table('VideoView')->where('userId', '=', $userId)->take(50)->get();
+    }
+
+    public function userVideosSearch($userId, $search){
+        return DB::table('VideoView')
+            ->where('userId', '=', $userId)
+            ->where('title', 'like', '%'.$search.'%')
+            ->take(50)
+            ->get();
     }
     /**
      * Show the form for creating a new resource.
