@@ -23,6 +23,7 @@ class CreateWatchesTable extends Migration
             $table->integer("videoId");
             $table->foreign('videoId')->references('id')->on('videos')->onDelete('cascade')->onUpdate('cascade');
 
+            $table->integer("vote")->default("0");
             $table->integer("time");
         });
     }

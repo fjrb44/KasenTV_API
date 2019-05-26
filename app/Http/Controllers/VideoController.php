@@ -19,6 +19,7 @@ class VideoController extends Controller
      */
     // Devuelve los videos mas vistos
     public function index(){
+
         return DB::table('VideoView')
             ->orderBy("visualizations")
             ->take(50)
@@ -152,7 +153,9 @@ class VideoController extends Controller
      */
     public function show($id)
     {
-        return Video::find($id);
+        // return Video::find($id);
+        $video = DB::table('VideoView')->where('id', '=', $id)->first();
+        return json_encode($video);
     }
 
     /**

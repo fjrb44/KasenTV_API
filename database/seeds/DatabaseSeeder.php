@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             'username' => "Fran",
             'email' => "fran.rios@gmail.com",
             "logo" => "http://placehold.it/100x100",
+            "banner" => "http://placehold.it/1200x400",
             'google_data' => "nada",
             "languageId" => "1"
         ]);
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'username' => "Pepe",
             'email' => "pepe.poncio@gmail.com",
             "logo" => "http://placehold.it/100x100",
+            "banner" => "http://placehold.it/1200x400",
             'google_data' => "nada",
             "languageId" => "1"
         ]);
@@ -42,6 +44,7 @@ class DatabaseSeeder extends Seeder
             'username' => "Paco",
             'email' => "paco.morcilla@gmail.com",
             "logo" => "http://placehold.it/100x100",
+            "banner" => "http://placehold.it/1200x400",
             'google_data' => "nada",
             "languageId" => "1"
         ]);

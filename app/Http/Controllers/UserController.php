@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use DB;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return DB::table('UserView')->get();;
     }
 
     /**
@@ -58,7 +59,19 @@ class UserController extends Controller
      */
     public function show($userId)
     {
-        return User::find($userId);
+        // return User::find($userId);
+        // return [];
+        
+        $user = DB::table('UserView')->where('id', '=', $userId)->first();
+        return json_encode($user);
+    }
+
+    public function searchUser($username){
+        return DB::table('UserView')
+            ->where('username', 'like', '%'.$username.'%')
+            ->orderBy("followers")
+            ->take(4)
+            ->get();
     }
 
     /**
