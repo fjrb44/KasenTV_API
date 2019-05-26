@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -17,6 +18,13 @@ class CategoryController extends Controller
         return Category::all();
     }
 
+    public function videos($categoryId){
+        return DB::table('VideoView')
+            ->where('categoryId', "=", $categoryId)
+            ->orderBy("visualizations")
+            ->take(50)
+            ->get();
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -46,3 +46,6 @@ Route::get("/user/{userId}/home", "VideoController@home"); // Get home videos of
 Route::get("/user/{userId}/recomend/{videoId}", "VideoController@recomendations"); // Video recomendations
 Route::get("/user/{userId}/videos", "VideoController@userVideos"); // Get videos from user
 Route::get("/user/{userId}/videos/search/{search}", "VideoController@userVideosSearch"); // Get videos from user
+
+Route::get("/category", "CategoryController@index");
+Route::get("/category/{categoryId}/videos", "CategoryController@videos");

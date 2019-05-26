@@ -46,6 +46,21 @@ class DatabaseSeeder extends Seeder
             "languageId" => "1"
         ]);
 
+        $categories = [
+            "Videojuegos", "Blog", "Música", "Peliculas", "Noticias"
+        ];
+        $fontAwesomeCategories = [
+            "fa fa-gamepad", "fa fa-commenting-o",
+            "fa fa-music", "fa fa-film", "fa fa-newspaper-o"
+        ];
+
+        for($i = 0, $length = sizeof($categories); $i < $length; $i++){
+            DB::table('categories')->insert([
+                'name' => $categories[$i],
+                'logo' => $fontAwesomeCategories[$i]
+            ]);
+        }
+
         $videoTitles = [ 
             "Video test 0", "Video test 10", "Video test 20", "Video test 30", "Video test 40",
             "Video test 1", "Video test 11", "Video test 21", "Video test 31", "Video test 41", 
@@ -61,12 +76,15 @@ class DatabaseSeeder extends Seeder
         $userId = 1;
 
         foreach( $videoTitles as $title){
+            $categoryId = rand(1,5);
+
             DB::table("videos")->insert([
                 "description" => "Some dummy text in ".$title,
                 "url" => "http://techslides.com/demos/sample-videos/small.mp4",
                 "imageUrl" => "http://placehold.it/500x250",
                 "title" => $title,
-                "userId" => $userId
+                "userId" => $userId,
+                "categoryId" => $categoryId
             ]);
 
             if( $userId == 3 ) $userId = 1;
