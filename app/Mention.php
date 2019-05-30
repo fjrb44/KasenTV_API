@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mention extends Model
 {
+    public $timestamps = false;
+    
     public function coment(){
         $this->belongsTo("App\Coment");
     }

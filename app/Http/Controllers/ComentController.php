@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Coment;
+use App\Video;
+use App\Mention;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ComentRequest;
 
@@ -34,8 +37,17 @@ class ComentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ComentRequest $request)
+    public function store(ComentRequest $request, $userId, $videoId)
     {
+        
+        if( empty(Video::find($videoId)) ){
+            return ["error" => "No such video"];
+        }
+
+        if( empty(User::find($userId)) ){
+            return ["error" => "No such user"];
+        }
+        
         $coment = new Coment;
 
         $coment->text = $request->input('text');
@@ -46,7 +58,15 @@ class ComentController extends Controller
         
         $coment->save();
 
-        return ["message" => "Data saved"];
+        $mention = new Mention;
+
+        $mention->userId = $userId;
+        $mention->videoId = $videoId;
+        $mention->comentId = $coment->id;
+
+        $mention->save();
+        
+        return ["message" => "Data saved", "Data" => $coment];
     }
 
     /**

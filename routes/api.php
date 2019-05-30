@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get("/videos", "VideoController@index"); // Get tendencies
 Route::get("/videos/{videoId}", "VideoController@show"); // Get the video
 Route::get("/videos/{videoId}/comments", "VideoController@comments"); // Get video comments
+Route::post("/user/{userId}/videos/{videoId}/newComment", 'ComentController@store'); // Create a new Comment
 Route::get("/videos/search/{search}", "VideoController@search"); // Get searched videos
 // Route::get("/videos/{videoId}/comments/{commentId}/reply", "VideoController@show"); // Get comment replies
 Route::get("/user/{userId}", "UserController@show"); // Get user data
