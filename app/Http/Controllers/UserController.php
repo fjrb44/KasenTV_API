@@ -58,10 +58,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($userId)
-    {
-        // return User::find($userId);
-        // return [];
-        
+    {  
         $user = DB::table('UserView')->where('id', '=', $userId)->first();
         return json_encode($user);
     }
@@ -71,6 +68,16 @@ class UserController extends Controller
             ->where('username', 'like', '%'.$username.'%')
             ->orderBy("followers")
             ->take(4)
+            ->get();
+    }
+
+    public function suscriptions($userId){
+        return DB::table('UserView')
+            ->select(DB::raw('UserView.*'))
+            ->join('users', 'UserView.id', '=', 'users.id')
+            ->join('suscribes', 'users.id', '=', 'suscribes.influencerId')
+            ->where('suscribes.suscriberId', '=', $userId)
+            ->orderBy("followers")
             ->get();
     }
 
