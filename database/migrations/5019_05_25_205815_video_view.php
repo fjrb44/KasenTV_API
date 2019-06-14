@@ -15,7 +15,7 @@ class VideoView extends Migration
     {
         DB::statement("CREATE VIEW VideoView AS
                 SELECT 
-                    videos.*, count(*) as visualizations, 
+                    videos.*, count(watches.videoId) as visualizations, 
                     users.username,  users.logo as userLogo
                 FROM videos
                 LEFT JOIN watches ON videos.id = watches.videoId

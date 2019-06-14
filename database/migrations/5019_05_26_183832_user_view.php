@@ -16,9 +16,9 @@ class UserView extends Migration
         DB::statement("CREATE VIEW UserView AS
             SELECT 
                 users.id, users.username,  users.logo, users.banner,
-                count(*) as followers
+                count(suscribes.influencerId) as followers
             FROM users
-            INNER JOIN suscribes ON users.id = suscribes.influencerId
+            LEFT JOIN suscribes ON users.id = suscribes.influencerId
             GROUP BY users.id"
         );
     }

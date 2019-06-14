@@ -102,10 +102,6 @@ class DatabaseSeeder extends Seeder
 
         DB::table('suscribes')->insert([
             "suscriberId" => 3,
-            "influencerId" => 1
-        ]);
-        DB::table('suscribes')->insert([
-            "suscriberId" => 3,
             "influencerId" => 2
         ]);
     }
