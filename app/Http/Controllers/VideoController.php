@@ -72,8 +72,9 @@ class VideoController extends Controller
     }
 
     public function comments($videoId){
-        return Mention::select(DB::raw('coments.*'))
-            ->join('coments', 'comentId', "=", "coments.id")
+        return Mention::select(DB::raw('users.id as userId, users.username, users.logo, coments.*'))
+            ->join('coments', 'mentions.comentId', "=", "coments.id")
+            ->join('users', 'mentions.userId', '=', 'users.id')
             ->where('videoId', '=', $videoId)
             ->get();
     }
