@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Suscribe;
 use Illuminate\Http\Request;
 use DB;
 
@@ -81,6 +82,68 @@ class UserController extends Controller
             ->get();
     }
 
+    public function suscripted($userId, $channelId){
+        return $suscription = DB::table("suscribes")
+            ->where("suscriberId", "=", $userId)
+            ->where("influencerId", "=", $channelId)
+            ->get();
+    }
+    public function suscribe($userId, $channelId){
+        if( empty(User::find($userId)) ) {
+            return ["error" => "User does not exist"];
+        }
+
+        if( empty(User::find($channelId)) ){
+            return ["error" => "Channel does not exist"];
+        }
+
+        if($userId == $channelId){
+            return ["error" => "You can't suscribe yourself"];
+        }
+
+        $suscription = DB::table("suscribes")
+            ->where("suscriberId", "=", $userId)
+            ->where("influencerId", "=", $channelId)
+            ->get();
+
+        if(sizeof($suscription) != 0){
+            return ["error" => "You can't suscribe twice"];
+        }
+
+        $suscription = new Suscribe();
+
+        $suscription->suscriberId = $userId;
+        $suscription->influencerId = $channelId;
+
+        $suscription->save();
+
+        return ["message" => "Data saved"];
+    }
+
+    public function unsuscribe($userId, $channelId){
+        if( empty(User::find($userId)) ) {
+            return ["error" => "User does not exist"];
+        }
+
+        if( empty(User::find($channelId)) ){
+            return ["error" => "Channel does not exist"];
+        }
+
+        $suscription = DB::table("suscribes")
+            ->where("suscriberId", "=", $userId)
+            ->where("influencerId", "=", $channelId)
+            ->get();
+
+        if(sizeof($suscription)  == 0){
+            return ["error" => "This suscription does not exist."];
+        }
+
+        Suscribe::where("suscriberId", "=", $userId)
+            ->where("influencerId", "=", $channelId)
+            ->delete();
+
+        return ["message" => "Data deleted"];
+    }
     /**
      * Show the form for editing the specified resource.
      *

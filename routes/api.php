@@ -33,6 +33,11 @@ Route::get("/user/{userId}/suscriptions", "UserController@suscriptions"); // Get
 Route::get("/user/{userId}/videos/search/{search}", "VideoController@userVideosSearch"); // Get videos from user
 Route::get("/user/search/{username}", "UserController@searchUser");
 
+Route::get("/user/{userId}/channel/{channelId}/suscripted", "UserController@suscripted"); // Return the suscription from userId to channelId
+
+Route::post("/user/{userId}/channel/{channelId}/suscribe", "UserController@suscribe"); // Suscribe the user to the channel
+Route::post("/user/{userId}/channel/{channelId}/unsuscribe", "UserController@unsuscribe"); // Unsuscribe the user to the channel
+
 Route::get("/category", "CategoryController@index");
 Route::get("/category/{categoryId}", "CategoryController@show");
 Route::get("/category/{categoryId}/videos", "CategoryController@videos");
