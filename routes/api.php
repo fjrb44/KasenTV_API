@@ -38,6 +38,8 @@ Route::get("/user/{userId}/channel/{channelId}/suscripted", "UserController@susc
 Route::post("/user/{userId}/channel/{channelId}/suscribe", "UserController@suscribe"); // Suscribe the user to the channel
 Route::post("/user/{userId}/channel/{channelId}/unsuscribe", "UserController@unsuscribe"); // Unsuscribe the user to the channel
 
+Route::post("/user/{userId}/newVideo", "VideoController@store");
+
 Route::get("/category", "CategoryController@index");
 Route::get("/category/{categoryId}", "CategoryController@show");
 Route::get("/category/{categoryId}/videos", "CategoryController@videos");

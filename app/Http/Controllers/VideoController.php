@@ -119,6 +119,8 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(NewVideoRequest $request){
+        return ["data" => $request->input('description')];
+
         $video = new Video();
 
         if($request->hasFile('url')){
@@ -143,7 +145,10 @@ class VideoController extends Controller
         $video->title = $request->input('title');
         $video->userId = $request->input('userId');
         $video->categoryId = $request->input('categoryId');
-        //
+        
+        $video->save();
+
+        return ["message" => "Data saved", "data" => $video];
     }
 
     /**
