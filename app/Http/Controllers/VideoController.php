@@ -119,7 +119,7 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(NewVideoRequest $request){
-        return ["data" => $request->input('description')];
+        return ["data" => $request->all()];
 
         $video = new Video();
 

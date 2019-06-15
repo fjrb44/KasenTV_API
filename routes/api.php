@@ -19,6 +19,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 */
 
+Route::group([
+    'middleware' => 'api'
+], function ($router){
+    Route::post('login', 'AuthController@login');
+    Route::post('signup', 'AuthController@signup');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+});
+
 Route::get("/videos", "VideoController@index"); // Get tendencies
 Route::get("/videos/{videoId}", "VideoController@show"); // Get the video
 Route::get("/videos/{videoId}/comments", "VideoController@comments"); // Get video comments
