@@ -35,17 +35,33 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    private function loginFromSignup(){
+        
+    }
+
     public function signup(SignUpRequest $request){
-        /*
+        
         $user = new User;
 
         $user->username = $request->input('username');
         $user->password = $request->input('password');
         $user->email = $request->input('email');
-        */
+        // $user->logo = $request->
+
+        if($request->hasFile('logo')){
+            $image = $request->file('logo');
+            $imageUrl = "http://localhost:8000/storage/i_".$user->id.time().$image->getClientOriginalName();
+    
+            $image->move(public_path("storage"), $imageUrl);
+            
+            $user->logo = $imageUrl;
+        }
+
+        $user->save();
+
         // return ["data" => $user];
 
-        User::create($request->all());
+        // User::create($request->all());
         return $this->login($request); 
     }
 
