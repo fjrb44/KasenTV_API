@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
                 'shortName' => $idiomaCort[$i]
             ]);
         }
-
+        
+        /*
         DB::table('users')->insert([
             'username' => "Fran",
             'email' => "fran.rios@gmail.com",
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'email' => "paco.morcilla@gmail.com",
             'password' => bcrypt("123")
         ]);
+        */
 
         $categories = [
             "Videojuegos", "Blog", "Música", "Peliculas", "Noticias"
@@ -55,6 +57,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        /*
         $videoTitles = [ 
             "Video test 0", "Video test 10", "Video test 20", "Video test 30", "Video test 40",
             "Video test 1", "Video test 11", "Video test 21", "Video test 31", "Video test 41", 
@@ -95,5 +98,6 @@ class DatabaseSeeder extends Seeder
             "suscriberId" => 3,
             "influencerId" => 2
         ]);
+        */
     }
 }
