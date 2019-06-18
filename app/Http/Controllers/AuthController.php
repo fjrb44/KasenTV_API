@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         if($request->hasFile('logo')){
             $image = $request->file('logo');
-            $imageUrl = "i_".$user->id.time().$image->getClientOriginalName();
+            $imageUrl = "i_".$user->id.time();
     
             $image->move(public_path("storage"), $imageUrl);
             
@@ -80,7 +80,7 @@ class AuthController extends Controller
             }
             
             $logo = $request->file('logo');
-            $logoUrl = "i_".$user->id.time().$logo->getClientOriginalName();
+            $logoUrl = "i_".$user->id.time();
             
             $logo->move(public_path("storage"), $logoUrl);
             $user->logo = $logoUrl;
@@ -93,7 +93,7 @@ class AuthController extends Controller
             }
             
             $banner = $request->file('banner');
-            $bannerUrl = "i_".$user->id.time().$banner->getClientOriginalName();
+            $bannerUrl = "i_".$user->id.time();
             
             $banner->move(public_path("storage"), $bannerUrl);
             $user->banner = $bannerUrl;
@@ -263,7 +263,7 @@ class AuthController extends Controller
 
         if($request->hasFile('url')){
             $urlVideo = $request->file('url');
-            $url = "v_".$video->id.time().$urlVideo->getClientOriginalName();
+            $url = "v_".$video->id.time();
 
             $urlVideo->move(public_path("storage"), $url);
 
@@ -272,7 +272,7 @@ class AuthController extends Controller
 
         if($request->hasFile('imageUrl')){
             $urlImage = $request->file('imageUrl');
-            $imageUrl = "i_".$video->id.time().$urlImage->getClientOriginalName();
+            $imageUrl = "i_".$video->id.time();
             
             $urlImage->move(public_path("storage"), $imageUrl);
 
@@ -305,7 +305,7 @@ class AuthController extends Controller
             Storage::delete("public/".$video->imageUrl);
 
             $urlImage = $request->file('imageUrl');
-            $imageUrl = "i_".$video->id.time().$urlImage->getClientOriginalName();
+            $imageUrl = "i_".$video->id.time();
             
             $urlImage->move(public_path("storage"), $imageUrl);
 
