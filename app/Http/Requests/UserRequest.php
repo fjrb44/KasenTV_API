@@ -13,7 +13,6 @@ class UserRequest extends FormRequest{
         return [
             "username" => ["required"],
             "email" => ["required"],
-            "google_data" => ["required"],
             "languageId" => ["numeric"]
         ];
     }

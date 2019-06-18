@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Watch extends Model
 {
+    public $timestamps = false;
+    
     public function user(){
         $this->belongsTo("App\Usuario");
     }

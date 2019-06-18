@@ -74,8 +74,8 @@ class DatabaseSeeder extends Seeder
 
             DB::table("videos")->insert([
                 "description" => "Some dummy text in ".$title,
-                "url" => "http://techslides.com/demos/sample-videos/small.mp4",
-                "imageUrl" => "http://placehold.it/500x250",
+                "url" => "small.mp4",
+                "imageUrl" => "500x250.png",
                 "title" => $title,
                 "userId" => $userId,
                 "categoryId" => $categoryId

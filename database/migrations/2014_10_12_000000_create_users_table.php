@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('username');
             $table->string('email')->unique();
-            $table->string('logo')->default("http://placehold.it/100x100");
-            $table->string("banner")->default("http://placehold.it/1200x400");
+            $table->string('logo')->default("100x100.png");
+            $table->string("banner")->default("1200x400.png");
             // $table->string('google_data');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

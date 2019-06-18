@@ -22,13 +22,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([
     'middleware' => 'api'
 ], function ($router){
-    Route::post('login', 'AuthController@login');
-    Route::post('signup', 'AuthController@signup');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
-    Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
-    Route::post('resetPassword', 'ChangePasswordController@process');
+    Route::post('login', 'AuthController@login'); // Login for the user
+    Route::post('signup', 'AuthController@signup'); // SignUp for the user
+    Route::post('logout', 'AuthController@logout'); // Logout for the user
+    // Route::post('refresh', 'AuthController@refresh');
+    // Route::post('me', 'AuthController@me');
+    Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail'); // Send password reset
+    Route::post('resetPassword', 'ChangePasswordController@process'); // Reset password
 });
 
 Route::get("/videos", "VideoController@index"); // Get tendencies
@@ -43,15 +43,17 @@ Route::get("/user/{userId}/recomend/{videoId}", "VideoController@recomendations"
 Route::get("/user/{userId}/videos", "VideoController@userVideos"); // Get videos from user
 Route::get("/user/{userId}/suscriptions", "UserController@suscriptions"); // Get the users who are followed by userId
 Route::get("/user/{userId}/videos/search/{search}", "VideoController@userVideosSearch"); // Get videos from user
-Route::get("/user/search/{username}", "UserController@searchUser");
+Route::get("/user/search/{username}", "UserController@searchUser"); // Get the searched users
 
 Route::get("/user/{userId}/channel/{channelId}/suscripted", "UserController@suscripted"); // Return the suscription from userId to channelId
 
+Route::post("/user/edit", 'AuthController@editUser'); // Edit the user
+Route::post("/user/{userId}/video/{videoId}/watch", 'UserController@watch');
 Route::post("/user/{userId}/channel/{channelId}/suscribe", "UserController@suscribe"); // Suscribe the user to the channel
 Route::post("/user/{userId}/channel/{channelId}/unsuscribe", "UserController@unsuscribe"); // Unsuscribe the user to the channel
 
-Route::post("/user/{userId}/newVideo", "VideoController@store");
+Route::post("/user/{userId}/newVideo", "VideoController@store"); // Post a new video
 
-Route::get("/category", "CategoryController@index");
-Route::get("/category/{categoryId}", "CategoryController@show");
-Route::get("/category/{categoryId}/videos", "CategoryController@videos");
+Route::get("/category", "CategoryController@index"); // Get all categories
+Route::get("/category/{categoryId}", "CategoryController@show"); // Get the category selected
+Route::get("/category/{categoryId}/videos", "CategoryController@videos"); // Get the videos from the category selected

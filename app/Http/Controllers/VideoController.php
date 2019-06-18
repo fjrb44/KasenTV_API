@@ -21,7 +21,7 @@ class VideoController extends Controller
     public function index(){
 
         return DB::table('VideoView')
-            ->orderBy("visualizations")
+            ->orderBy("visualizations", "desc")
             ->take(50)
             ->get();
     }
@@ -34,7 +34,7 @@ class VideoController extends Controller
                     ->from('suscribes')
                     ->where('suscriberId', '=', "$userId");
             })
-            ->orderBy("visualizations")
+            ->orderBy("visualizations", "desc")
             ->take(50)
             ->get();
         
@@ -42,7 +42,7 @@ class VideoController extends Controller
 
         if(sizeof($homeVideos) == 0){
             $homeVideos = DB::table('VideoView')
-                ->orderBy("visualizations")
+                ->orderBy("visualizations", "desc")
                 ->take(50)
                 ->get();
         }
@@ -58,13 +58,13 @@ class VideoController extends Controller
                     ->where('suscriberId', '=', "$userId");
             })
             ->where('id', "!=", $videoId)    
-            ->orderBy("visualizations")
+            ->orderBy("visualizations", "desc")
             ->take(5)
             ->get();
         
         if(sizeof($recomendations) == 0){
             $recomendations = DB::table('VideoView')
-                ->orderBy("visualizations")
+                ->orderBy("visualizations", "desc")
                 ->take(5)
                 ->get();
         }
@@ -83,7 +83,7 @@ class VideoController extends Controller
         return DB::table('VideoView')
             ->where('title', 'like', '%'.$search.'%')
             ->orWhere('username', 'like', '%'.$search.'%')
-            ->orderBy("visualizations")
+            ->orderBy("visualizations", "desc")
             ->take(50)
             ->get();
     }
@@ -110,7 +110,6 @@ class VideoController extends Controller
         //
     }
     */
-    
 
     /**
      * Store a newly created resource in storage.
@@ -119,15 +118,13 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(NewVideoRequest $request){
-        return ["data" => $request->all()];
-
         $video = new Video();
 
         if($request->hasFile('url')){
             $urlVideo = $request->file('url');
             $url = "v_".$video->id.time().$urlVideo->getClientOriginalName();
 
-            $file->move(public_path("storage"), $url);
+            $urlVideo->move(public_path("storage"), $url);
 
             $video->url = $url;
         }
@@ -136,7 +133,7 @@ class VideoController extends Controller
             $urlImage = $request->file('imageUrl');
             $imageUrl = "i_".$video->id.time().$urlImage->getClientOriginalName();
             
-            $file->move(public_path("storage"), $imageUrl);
+            $urlImage->move(public_path("storage"), $imageUrl);
 
             $video->imageUrl = $imageUrl;
         }
@@ -187,7 +184,7 @@ class VideoController extends Controller
         $video = Video::find($id);
         $aux = false;
         
-        if($request->hasFile('logo')){
+        if($request->hasFile('imageUrl')){
             Storage::delete("public/".$video->logo);
 
             $image = $request->file('imageUrl');
