@@ -89,7 +89,7 @@ class VideoController extends Controller
     }
 
     public function userVideos($userId){
-        return DB::table('VideoView')->where('userId', '=', $userId)->take(50)->get();
+        return DB::table('VideoView')->where('userId', '=', $userId)->take(50)->orderBy("created_at", "desc")->get();
     }
 
     public function userVideosSearch($userId, $search){
@@ -117,36 +117,6 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NewVideoRequest $request){
-        $video = new Video();
-
-        if($request->hasFile('url')){
-            $urlVideo = $request->file('url');
-            $url = "v_".$video->id.time().$urlVideo->getClientOriginalName();
-
-            $urlVideo->move(public_path("storage"), $url);
-
-            $video->url = $url;
-        }
-
-        if($request->hasFile('imageUrl')){
-            $urlImage = $request->file('imageUrl');
-            $imageUrl = "i_".$video->id.time().$urlImage->getClientOriginalName();
-            
-            $urlImage->move(public_path("storage"), $imageUrl);
-
-            $video->imageUrl = $imageUrl;
-        }
-
-        $video->description = $request->input('description');
-        $video->title = $request->input('title');
-        $video->userId = $request->input('userId');
-        $video->categoryId = $request->input('categoryId');
-        
-        $video->save();
-
-        return ["message" => "Data saved", "data" => $video];
-    }
 
     /**
      * Display the specified resource.

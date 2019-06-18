@@ -29,12 +29,20 @@ Route::group([
     // Route::post('me', 'AuthController@me');
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail'); // Send password reset
     Route::post('resetPassword', 'ChangePasswordController@process'); // Reset password
+    
+    Route::post("/user/videos/{videoId}/newComment", 'ComentController@store'); // Create a new Comment
+    Route::post("/user/edit", 'AuthController@editUser'); // Edit the user
+    Route::post("/user/video/{videoId}/watch", 'AuthController@watch');
+    Route::post("/user/channel/{channelId}/suscribe", "AuthController@suscribe"); // Suscribe the user to the channel
+    Route::post("/user/channel/{channelId}/unsuscribe", "AuthController@unsuscribe"); // Unsuscribe the user to the channel
+    
+    Route::post("/user/newVideo", "AuthController@videoStore"); // Post a new video
+    Route::post("/video/{videId}/edit", "AuthController@videoEdit"); // Edit the video selected
 });
 
 Route::get("/videos", "VideoController@index"); // Get tendencies
 Route::get("/videos/{videoId}", "VideoController@show"); // Get the video
 Route::get("/videos/{videoId}/comments", "VideoController@comments"); // Get video comments
-Route::post("/user/{userId}/videos/{videoId}/newComment", 'ComentController@store'); // Create a new Comment
 Route::get("/videos/search/{search}", "VideoController@search"); // Get searched videos
 // Route::get("/videos/{videoId}/comments/{commentId}/reply", "VideoController@show"); // Get comment replies
 Route::get("/user/{userId}", "UserController@show"); // Get user data
@@ -47,12 +55,6 @@ Route::get("/user/search/{username}", "UserController@searchUser"); // Get the s
 
 Route::get("/user/{userId}/channel/{channelId}/suscripted", "UserController@suscripted"); // Return the suscription from userId to channelId
 
-Route::post("/user/edit", 'AuthController@editUser'); // Edit the user
-Route::post("/user/{userId}/video/{videoId}/watch", 'UserController@watch');
-Route::post("/user/{userId}/channel/{channelId}/suscribe", "UserController@suscribe"); // Suscribe the user to the channel
-Route::post("/user/{userId}/channel/{channelId}/unsuscribe", "UserController@unsuscribe"); // Unsuscribe the user to the channel
-
-Route::post("/user/{userId}/newVideo", "VideoController@store"); // Post a new video
 
 Route::get("/category", "CategoryController@index"); // Get all categories
 Route::get("/category/{categoryId}", "CategoryController@show"); // Get the category selected

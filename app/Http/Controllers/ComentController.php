@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Coment;
 use App\Video;
 use App\Mention;
@@ -11,6 +12,12 @@ use App\Http\Requests\ComentRequest;
 
 class ComentController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['login', 'signup']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,15 +44,12 @@ class ComentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ComentRequest $request, $userId, $videoId)
+    public function store(ComentRequest $request, $videoId)
     {
-        
+        $userId = Auth::user()->id;
+
         if( empty(Video::find($videoId)) ){
             return ["error" => "No such video"];
-        }
-
-        if( empty(User::find($userId)) ){
-            return ["error" => "No such user"];
         }
         
         $coment = new Coment;

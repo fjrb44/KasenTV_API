@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function videos($categoryId){
         return DB::table('VideoView')
             ->where('categoryId', "=", $categoryId)
-            ->orderBy("visualizations")
+            ->orderBy("visualizations", "desc")
             ->take(50)
             ->get();
     }
