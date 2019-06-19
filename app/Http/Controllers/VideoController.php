@@ -37,7 +37,7 @@ class VideoController extends Controller
             ->orderBy("visualizations", "desc")
             ->take(50)
             ->get();
-        
+
         // $homeVideos = response()->json($homeVideos);
 
         if(sizeof($homeVideos) == 0){
@@ -57,13 +57,14 @@ class VideoController extends Controller
                     ->from('suscribes')
                     ->where('suscriberId', '=', "$userId");
             })
-            ->where('id', "!=", $videoId)    
+            ->whereRaw('id != '.$videoId)
             ->orderBy("visualizations", "desc")
             ->take(5)
             ->get();
-        
+
         if(sizeof($recomendations) == 0){
             $recomendations = DB::table('VideoView')
+                ->whereRaw('id != '.$videoId)
                 ->orderBy("visualizations", "desc")
                 ->take(5)
                 ->get();
@@ -153,7 +154,7 @@ class VideoController extends Controller
     {
         $video = Video::find($id);
         $aux = false;
-        
+
         if($request->hasFile('imageUrl')){
             Storage::delete("public/".$video->logo);
 
@@ -170,12 +171,12 @@ class VideoController extends Controller
             $aux = true;
         }
 
-        
+
         if($video->title != $request->input('title')){
             $video->title = $request->input('title');
             $aux = true;
         }
-        
+
         if($video->categoryId != $request->input('categoryId')){
             $video->categoryId = $request->input('categoryId');
             $aux = true;
@@ -194,7 +195,7 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $video = Video::find($id);
 
         if(!empty($video)){
