@@ -319,7 +319,7 @@ class AuthController extends Controller
             $aux = true;
         }
 
-        if($video->description != $request->input("description") && !empty($request->input('description'))){
+        if($video->description != $request->input("title") && !empty($request->input('title'))){
             $video->title = $request->input('title');
             $aux = true;
         }
